@@ -10,7 +10,9 @@ class MercuryParser:
     def __init__(self, api_endpoint=API_ENDPOINT, api_key=None):
         self.api_key = api_key
         self.api_endpoint = api_endpoint
-        self.headers = {"x-api-key": self.api_key}
+        self.headers = {"x-api-key": self.api_key,
+                        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+                        }
 
     def parse_article(self, article_url):
         """
