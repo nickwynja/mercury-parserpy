@@ -12,11 +12,14 @@ class MercuryParser:
         self.api_endpoint = api_endpoint
         self.headers = {"x-api-key": self.api_key}
 
-    def parse_article(self, article_url):
+    def parse_article(self, article_url, html=None):
         """
         Parse article URL returns a requests.Response
         """
-        url = "{}parser?url={}".format(self.api_endpoint, article_url)
+        if html:
+            url = "{}parser?url={}".format(self.api_endpoint, article_url, html=html)
+        else:
+            url = "{}parse-html?url={}".format(self.api_endpoint, article_url)
         response = requests.get(url, headers=self.headers)
         return response
 
