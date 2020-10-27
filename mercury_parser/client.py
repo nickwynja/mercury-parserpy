@@ -17,10 +17,12 @@ class MercuryParser:
         Parse article URL returns a requests.Response
         """
         if html:
-            url = "{}parser?url={}".format(self.api_endpoint, article_url, html=html)
+            url = "{}parse-html".format(self.api_endpoint)
+            data = {'url': article_url, 'html': html}
+            response = requests.post(url=url, data=data)
         else:
-            url = "{}parse-html?url={}".format(self.api_endpoint, article_url)
-        response = requests.get(url, headers=self.headers)
+            url = "{}parser?url={}".format(self.api_endpoint, article_url)
+            response = requests.get(url, headers=self.headers)
         return response
 
     def parse_multiple_articles(self, *urls):
